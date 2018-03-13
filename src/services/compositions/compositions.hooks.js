@@ -1,11 +1,13 @@
 
 
+const processCompositions = require('../../hooks/process-compositions');
+
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [processCompositions()],
     update: [],
     patch: [],
     remove: []
