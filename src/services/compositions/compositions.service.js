@@ -15,7 +15,8 @@ module.exports = function (app) {
 
   mongoClient.then(db => {
     service.Model = db.collection('compositions');
-    service.Model.insert({"writeStuff": "gayyy"});
+    //Below is a test database insert (need to do this for real somewhere else)
+    service.Model.insert({"initial_write": "initial test write to the DB"});
 
   });
 
