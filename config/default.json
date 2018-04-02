@@ -6,5 +6,29 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb+srv://pianio:pian.ioackkls@cluster0-dmkif.mongodb.net/test"
+  "mongodb": "mongodb+srv://pianio:pian.ioackkls@cluster0-dmkif.mongodb.net/test",
+  "authentication": {
+    "secret": "3a1d41d780f211f0fba9cd2882cbd1db8b2e7288102b9bd0023496ff1a49079a34070ff48252805278aac0f0b22108592bc97416fd6747ceb02a98b9e5eaf2341e328defb9b08c3ce1a748d957a60696b9133484075675db14955a20c62cf9366e756776fd85df0c125178089a295733c962b517f566482d108cafd3cdd925dd1483564375296a1427251e7829827049f0716ac9e68d30d5e1c01e06c14aa87e65cf817c7e3d6429ad507db5af0ca2217bc93df7c0c07b51c5333e19e300416c819bf2f49dc35d95295cad817b7a3f1813e7735716effd105986d0f001c511daab792daaa0ced3623e34bd24ff57834f730ba63aa71634daa47d7b57b5852d26",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "\\username",
+      "passwordField": "password"
+    }
+  }
 }
