@@ -30,7 +30,6 @@ module.exports = function (options = {}) {
        // Add the current date
        createdAt: new Date().getTime()
      };
-
     return context;
   };
 };
