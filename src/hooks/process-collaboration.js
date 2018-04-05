@@ -40,9 +40,10 @@ module.exports = function (options = {}) {
 
     doesUserExist(usernames);
 
-   context.data = {
+    context.id = listOfCollaborators[0]._id 
+    context.data = {
      collaborators: collab
-   };
+    };
 
     return context;
   };
