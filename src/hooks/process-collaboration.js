@@ -36,11 +36,11 @@ module.exports = function (options = {}) {
 
     let firstResult = listOfCollaborators[0];
 
-    let collab = listOfCollaborators[0].collaborators + ',' + data.collaborators;
+    let collab = addToCollaboratorList(listOfCollaborators[0].collaborators, data.collaborators);
 
     doesUserExist(usernames);
 
-    context.id = listOfCollaborators[0]._id 
+    context.id = listOfCollaborators[0]._id
     context.data = {
      collaborators: collab
     };
@@ -48,6 +48,14 @@ module.exports = function (options = {}) {
     return context;
   };
 };
+function addToCollaboratorList (currentList, newUser) {
+    if(currentList === '') {
+        return newUser;
+    } else {
+        return currentList + ', ' + newUser;
+    }
+}
+
 function compositionIsSaved(compositionList) {
     if (compositionList.data.length === 0) {
         throw new Error('Please make sure this composition has been saved')
