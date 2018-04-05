@@ -1,6 +1,7 @@
 
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const processCompositions = require('../../hooks/process-compositions');
+const processCollaboration = require('../../hooks/process-collaboration');
 
 module.exports = {
   before: {
@@ -9,7 +10,7 @@ module.exports = {
     get: [],
     create: [processCompositions()],
     update: [],
-    patch: [],
+    patch: [processCollaboration()],
     remove: []
   },
 

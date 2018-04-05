@@ -4,8 +4,8 @@
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
-    const { data } = context; 
-    
+    const { data } = context;
+
     //throws an error if we don't get a username, password and email
     // Throw an error if we didn't get a text
     if(!data.email) {
@@ -65,7 +65,7 @@ if not will send appropriate Errors to the client */
 function confirm_unique_user(emails, usernames){
   var username_taken = usernames.data.length != 0
   var email_taken = emails.data.length != 0
-  
+
   //check if the user already exists
   if(username_taken && email_taken){
     throw new Error("Email and Username are already in use")
@@ -78,4 +78,3 @@ function confirm_unique_user(emails, usernames){
   }
 
 }
-
