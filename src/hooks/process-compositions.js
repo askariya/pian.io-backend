@@ -35,9 +35,10 @@ module.exports = function (options = {}) {
        nameOfComposition: data.compositionName,
        collaborators: '',
        // Set the user id for the composition
-       ownerId: user,
+       ownerId: user.username,
        // Add the current date
-       createdAt: new Date().getTime()
+       createdAt: new Date().getTime(),
+       active: user.username
      };
     return context;
   };
