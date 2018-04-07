@@ -12,7 +12,8 @@ module.exports = function (options = {}) {
     const { data } = context;
 
     // The authenticated user
-    const name = data.compositionName;
+    const user = context.params.user;
+    let name = data.nameOfComposition;
 
     const userService = context.app.service('users')
     const usernames = await userService.find({
@@ -20,6 +21,13 @@ module.exports = function (options = {}) {
           username: data.collaborators
       }
     })
+
+    if(data.newName){
+        name = data.newName
+    }
+    if(data.removeName){
+        name = data.removeName
+    }
 
     const compositionService = context.app.service('compositions')
     const compositionWanted = await compositionService.find({
@@ -41,10 +49,36 @@ module.exports = function (options = {}) {
     doesUserExist(usernames);
 
     context.id = listOfCollaborators[0]._id
+    if(data.newName){
+        //get list of previous active users
+        let newActiveList = checkForDuplicates(listOfCollaborators, user.username);
+        context.data = {
+            active: newActiveList
+        }
+    }
+    if(data.removeName){
+        let removedActiveList = removeUser(listOfCollaborators, user.username);
+        context.data = {
+            active: removedActiveList
+        }
+    }
 
     return context;
   };
 };
+function removeUser(existingData, user){
+    if(existingData[0].active.includes(user)){
+        return existingData[0].active.replace(user,'')
+    }
+}
+
+function checkForDuplicates(data, newActiveUser){
+    if(!data[0].active.includes(newActiveUser)){
+        return data[0].active + ',' + newActiveUser
+    } else {
+        return data[0].active
+    }
+}
 function addToCollaboratorList (currentList, newUser) {
     if(currentList === '') {
         return newUser;

@@ -17,7 +17,7 @@ module.exports = function (options = {}) {
 
      // The authenticated user
      const user = context.params.user;
-     const name = data.compositionName;
+     const name = data.nameOfComposition;
 
      //Check to see if the composition name already exists
      const compositionService = context.app.service('compositions')
@@ -32,7 +32,7 @@ module.exports = function (options = {}) {
      // Override the original data (so that people can't submit additional stuff)
      context.data = {
        composition: data.text,
-       nameOfComposition: data.compositionName,
+       nameOfComposition: data.nameOfComposition,
        collaborators: '',
        // Set the user id for the composition
        ownerId: user.username,
