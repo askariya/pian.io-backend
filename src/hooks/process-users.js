@@ -8,21 +8,21 @@ module.exports = function (options = {}) {
     
     //throws an error if we don't get a username, password and email
     // Throw an error if we didn't get a text
-    if(!data.email) {
+    if (!data.email) {
       throw new Error('A user must have an email');
     }
-    else if(!data.username){
+    else if (!data.username) {
       throw new Error('A user must have a username');
     }
-    else if(!data.password){
+    else if (!data.password) {
       throw new Error('A user must have a password');
     }
 
-    if(!username_is_valid(data.username)){
+    if (!username_is_valid(data.username)) {
       throw new Error("Invalid username");
     }
 
-    if(!email_is_valid(data.email)){
+    if (!email_is_valid(data.email)) {
       throw new Error("Invalid email");
     }
 
