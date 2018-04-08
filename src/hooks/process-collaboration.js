@@ -62,6 +62,11 @@ module.exports = function (options = {}) {
             active: removedActiveList
         }
     }
+    if(data.collaborators){
+        context.data = {
+            collaborators: collab
+        }
+    }
 
     return context;
   };
@@ -83,7 +88,10 @@ function addToCollaboratorList (currentList, newUser) {
     if(currentList === '') {
         return newUser;
     } else {
-        return currentList + ', ' + newUser;
+        let tempList = [];
+        tempList = currentList;
+        tempList.push(newUser);
+        return tempList;
     }
 }
 
@@ -94,7 +102,7 @@ function compositionIsSaved(compositionList) {
 }
 
 function isNewCollabThere(listCollab, newCollab) {
-    if(listCollab[0].collaborators.includes(newCollab)){
+    if(listCollab[0].collaborators.indexOf(newCollab) !== -1){
         throw new Error('Already added as collaborator')
     }
 }

@@ -33,7 +33,7 @@ module.exports = function (options = {}) {
      context.data = {
        composition: data.text,
        nameOfComposition: data.nameOfComposition,
-       collaborators: '',
+       collaborators: [],
        // Set the user id for the composition
        ownerId: user.username,
        // Add the current date
