@@ -6,7 +6,7 @@ const {
 
 const processUsers = require('../../hooks/process-users');
 
-const processUsernameUpdate = require('../../hooks/process-username-update');
+const processUserUpdate = require('../../hooks/process-user-update');
 
 module.exports = {
   before: {
@@ -15,7 +15,7 @@ module.exports = {
     get: [ authenticate('jwt') ],
     create: [hashPassword(), processUsers()],
     update: [ hashPassword(),  authenticate('jwt') ],
-    patch: [hashPassword(), authenticate('jwt'), processUsernameUpdate()],
+    patch: [hashPassword(), authenticate('jwt'), processUserUpdate()],
     remove: [ authenticate('jwt') ]
   },
 
