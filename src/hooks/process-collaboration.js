@@ -16,17 +16,24 @@ module.exports = function (options = {}) {
     let name = data.nameOfComposition;
 
     const userService = context.app.service('users')
-    const usernames = await userService.find({
-      query: {
-          username: data.collaborators
-      }
-    })
+
+    if(data.newName && data.removeName){
+        const usernames = await userService.find({
+          query: {
+              username: data.collaborators
+          }
+        })
+        doesUserExist(usernames);
+    }
 
     if(data.newName){
         name = data.newName
     }
     if(data.removeName){
         name = data.removeName
+    }
+    if(data.collaborators){
+        name = data.nameOfComposition
     }
 
     const compositionService = context.app.service('compositions')
@@ -46,7 +53,7 @@ module.exports = function (options = {}) {
 
     let collab = addToCollaboratorList(listOfCollaborators[0].collaborators, data.collaborators);
 
-    doesUserExist(usernames);
+
 
     context.id = listOfCollaborators[0]._id
     if(data.newName){
