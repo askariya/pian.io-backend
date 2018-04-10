@@ -35,6 +35,9 @@ module.exports = function (options = {}) {
     if(data.collaborators){
         name = data.nameOfComposition
     }
+    if(data.newComposition){
+        name = data.nameOfComposition
+    }
 
     const compositionService = context.app.service('compositions')
     const compositionWanted = await compositionService.find({
@@ -72,6 +75,11 @@ module.exports = function (options = {}) {
     if(data.collaborators){
         context.data = {
             collaborators: collab
+        }
+    }
+    if(data.newComposition){
+        context.data = {
+            composition: data.newComposition
         }
     }
 
