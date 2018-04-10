@@ -3,7 +3,8 @@
 
 /*
 the process-compositions hook is a "before" hook, used to validate
-composition entries before they are entered into the database.
+composition entries before they are entered into the database. It is used when creating new
+composition entries
 */
 
 // eslint-disable-next-line no-unused-vars
