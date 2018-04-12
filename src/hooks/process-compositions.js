@@ -10,6 +10,7 @@ composition entries before they are entered into the database.
 module.exports = function (options = {}) {
   return async context => {
     const { data } = context; 
+    
     // Throw an error if we didn't get a text
     if(!data.text) {
       throw new Error('A composition must have a text');
