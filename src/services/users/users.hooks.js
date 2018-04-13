@@ -8,12 +8,14 @@ const processUsers = require('../../hooks/process-users');
 
 const processUserUpdate = require('../../hooks/process-user-update');
 
+const gravatar = require('../../hooks/gravatar');
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [hashPassword(), processUsers()],
+    create: [hashPassword(), processUsers(), gravatar()],
     update: [ hashPassword(),  authenticate('jwt') ],
     patch: [hashPassword(), authenticate('jwt'), processUserUpdate()],
     remove: [ authenticate('jwt') ]
