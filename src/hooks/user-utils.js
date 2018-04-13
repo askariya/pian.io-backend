@@ -18,9 +18,12 @@ module.exports = {
             var email_taken = false;
             var username_taken = usernames.data.length != 0;
         }
-
         else if (usernames === null) {
             var username_taken = false;
+            var email_taken = emails.data.length != 0;
+        }
+        else{
+            var username_taken = usernames.data.length != 0;
             var email_taken = emails.data.length != 0;
         }
 
