@@ -1,3 +1,4 @@
+const logger = require('winston');
 module.exports = function(app) {
   if(typeof app.channel !== 'function') {
     // If no real-time functionality has been configured just return
@@ -7,11 +8,6 @@ module.exports = function(app) {
   app.on('connection', connection => {
     // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
-  });
-  app.on('logout', (authResult, { connection }) => {
-      app.service('compositions').create({
-        removeUser: connection
-      })
   });
 
   app.on('login', (authResult, { connection }) => {

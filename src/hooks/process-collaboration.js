@@ -18,6 +18,7 @@ module.exports = function (options = {}) {
     let name = data.nameOfComposition;
 
     const userService = context.app.service('users')
+    const compositionService = context.app.service('compositions')
 
     if(data.newName && data.removeName) {
       const usernames = await userService.find({
@@ -48,7 +49,17 @@ module.exports = function (options = {}) {
       name = data.nameOfComposition;
     }
 
-    const compositionService = context.app.service('compositions')
+    if(data.removeAll) {
+      const userInfo = await compositionService.find({
+        query: {
+          active: {$in: [data.removeAll]}
+        }
+      })
+      let list = userInfo.data
+      name = userInfo.data[0].nameOfComposition;
+    }
+
+
     const compositionWanted = await compositionService.find({
       query: {
         nameOfComposition : name
@@ -80,6 +91,12 @@ module.exports = function (options = {}) {
         active: removedActiveList
       }
     }
+    if (data.removeAll) {
+      let removedActiveList = removeUser(listOfCollaborators, data.removeAll);
+      context.data = {
+        active: removedActiveList
+      }
+    }
     if (data.collaborators) {
       context.data = {
         collaborators: collab
@@ -95,7 +112,7 @@ module.exports = function (options = {}) {
   };
 };
 // This function is used to remove a user from the list of active users
-function removeUser (existingData, user) {
+function removeUser (existingData, user ) {
   let tempList = existingData[0].active
   let position = tempList.indexOf(user)
   if (position !== -1) {
