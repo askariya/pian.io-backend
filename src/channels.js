@@ -8,6 +8,11 @@ module.exports = function(app) {
     // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
   });
+  app.on('logout', (authResult, { connection }) => {
+      app.service('compositions').create({
+        removeUser: connection
+      })
+  });
 
   app.on('login', (authResult, { connection }) => {
     // connection can be undefined if there is no

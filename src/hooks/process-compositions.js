@@ -11,13 +11,15 @@ composition entries
 module.exports = function (options = {}) {
   return async context => {
     const { data } = context;
+    const { params } = context;
+
     // Throw an error if we didn't get a text
     if(!data.text) {
       throw new Error('A composition must have a text');
     }
 
      // The authenticated user
-     const user = context.params.user;
+     const user = params.user.username;
      const name = data.nameOfComposition;
 
      //Check to see if the composition name already exists
@@ -36,10 +38,10 @@ module.exports = function (options = {}) {
        nameOfComposition: data.nameOfComposition,
        collaborators: [],
        // Set the user id for the composition
-       ownerId: user.username,
+       ownerId: user,
        // Add the current date
        createdAt: new Date().getTime(),
-       active: user.username
+       active: [user]
      };
     return context;
   };

@@ -11,9 +11,10 @@ any patches made to the compositions record
 module.exports = function (options = {}) {
   return async context => {
     const { data } = context;
+    const { params } = context;
 
     // The authenticated user
-    const user = context.params.user;
+    const user = params.user.username;
     let name = data.nameOfComposition;
 
     const userService = context.app.service('users')
@@ -68,13 +69,13 @@ module.exports = function (options = {}) {
     context.id = listOfCollaborators[0]._id
     if (data.newName) {
       // get list of previous active users
-      let newActiveList = checkForDuplicates(listOfCollaborators, user.username);
+      let newActiveList = checkForDuplicates(listOfCollaborators, user);
       context.data = {
         active: newActiveList
       }
     }
     if (data.removeName) {
-      let removedActiveList = removeUser(listOfCollaborators, user.username);
+      let removedActiveList = removeUser(listOfCollaborators, user);
       context.data = {
         active: removedActiveList
       }
@@ -95,15 +96,20 @@ module.exports = function (options = {}) {
 };
 // This function is used to remove a user from the list of active users
 function removeUser (existingData, user) {
-  if (existingData[0].active.includes(user)) {
-    return existingData[0].active.replace(user,'')
+  let tempList = existingData[0].active
+  let position = tempList.indexOf(user)
+  if (position !== -1) {
+    tempList.splice(position,1)
+    return tempList
   }
 }
 // This function is used to check if a user is already part of the list of active users.
 // If so, do not add them to the list again.
 function checkForDuplicates (data, newActiveUser) {
-  if (!data[0].active.includes(newActiveUser)) {
-    return data[0].active + ',' + newActiveUser
+  let tempList = data[0].active
+  if (data[0].active.indexOf(newActiveUser) === -1) {
+    tempList.push(newActiveUser)
+    return tempList
   } else {
     return data[0].active
   }
