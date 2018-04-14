@@ -30,14 +30,5 @@
       "usernameField": "\\username",
       "passwordField": "password"
     }
-  },
-  "rethinkdb": {
-    "db": "pian_io_backend",
-    "servers": [
-      {
-        "host": "localhost",
-        "port": "28015"
-      }
-    ]
   }
 }

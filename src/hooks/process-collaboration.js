@@ -13,6 +13,8 @@ module.exports = function (options = {}) {
     const { data } = context;
     const { params } = context;
 
+    // console.log("Patching!")
+
     // The authenticated user
     const user = params.user.username;
     let name = data.nameOfComposition;

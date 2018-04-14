@@ -20,8 +20,6 @@ const mongodb = require('./mongodb');
 
 const authentication = require('./authentication');
 
-const knex = require('./knex');
-
 const app = express(feathers());
 
 // Load app configuration
@@ -41,8 +39,6 @@ app.configure(express.rest());
 app.configure(socketio());
 
 app.configure(mongodb);
-
-app.configure(knex);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
