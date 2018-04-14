@@ -11,7 +11,7 @@ const crypto = require('crypto');
 // The Gravatar image service
 const gravatarUrl = 'https://s.gravatar.com/avatar';
 // The size query. Our chat needs 60px images
-const query = 's=60';
+const query = 's=150';
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
@@ -20,7 +20,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     // Gravatar uses MD5 hashes from an email address to get the image
     const hash = crypto.createHash('md5').update(email).digest('hex');
 
-    context.data.avatar = `${gravatarUrl}/${hash}?${query}`;
+    context.data.avatar = `${gravatarUrl}/${hash}?${query}` + '&d=identicon&r=PG';
 
     // Best practice: hooks should always return the context
     return context;
