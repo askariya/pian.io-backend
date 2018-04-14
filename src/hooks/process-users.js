@@ -6,15 +6,15 @@ var utils = require('./user-utils');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
-    const { data } = context; 
-    
+    const { data } = context;
+
     //throws an error if we don't get a username, password and email
     // Throw an error if we didn't get a text
     if (!data.email) {
       throw new Error('A user must have an email');
     }
     else if (!data.username) {
-      throw new Error('A user must have a username');  
+      throw new Error('A user must have a username');
     }
     else if (!data.password) {
       throw new Error('A user must have a password');
@@ -53,4 +53,3 @@ module.exports = function (options = {}) {
     return context;
   };
 };
-

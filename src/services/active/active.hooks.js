@@ -1,16 +1,15 @@
 
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const processCompositions = require('../../hooks/process-compositions');
-const processCollaboration = require('../../hooks/process-collaboration');
+const processActiveUsers = require('../../hooks/process-activeUsers');
 
 module.exports = {
   before: {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processCompositions()],
+    create: [processActiveUsers()],
     update: [],
-    patch: [processCollaboration()],
+    patch: [],
     remove: []
   },
 
