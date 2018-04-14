@@ -7,8 +7,6 @@ module.exports = function (options = {}) {
 
     const { id } = context; 
     const { params } = context;
-
-    console.log('users', params.user)
     // if the get service is called with a null ID, assign user id from context
     if(id === null){
       context.id = params.user._id 
