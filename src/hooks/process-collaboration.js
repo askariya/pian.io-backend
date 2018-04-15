@@ -24,13 +24,14 @@ module.exports = function (options = {}) {
     const userService = context.app.service('users')
     const compositionService = context.app.service('compositions')
 
-    if(data.newName && data.removeName) {
+    if(data.collaborators) {
       const usernames = await userService.find({
         query: {
           username: data.collaborators
         }
       })
       doesUserExist(usernames);
+      isAddedUserSameAsCollaborator(data.collaborators, user);
     }
 
     if(data.newName) {
