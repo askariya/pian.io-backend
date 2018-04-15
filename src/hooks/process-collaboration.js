@@ -13,10 +13,16 @@ module.exports = function (options = {}) {
     const { data } = context;
     const { params } = context;
 
+    console.log('inside hook!!!!!!!!!!!!!!!!!!!!!!!');
+    let user;
     // The authenticated user
-    const user = params.user.username;
+    if(params.user){
+      user = params.user.username;
+    }
+    console.log('-----', data);
     let name = data.nameOfComposition;
-
+    console.log('still here', data);
+    console.log('-----', data);
     const userService = context.app.service('users')
     const compositionService = context.app.service('compositions')
 
@@ -50,6 +56,7 @@ module.exports = function (options = {}) {
     }
 
     if(data.removeAll) {
+      console.log('inside removeAll!!!!!!!!!!!!!!!!!!!!!!!');
       const userInfo = await compositionService.find({
         query: {
           active: {$in: [data.removeAll]}
