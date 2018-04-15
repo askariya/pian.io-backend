@@ -13,16 +13,14 @@ module.exports = function (options = {}) {
     const { data } = context;
     const { params } = context;
 
-    console.log('inside hook!!!!!!!!!!!!!!!!!!!!!!!');
     let user;
     // The authenticated user
     if(params.user){
       user = params.user.username;
     }
-    console.log('-----', data);
+
     let name = data.nameOfComposition;
-    console.log('still here', data);
-    console.log('-----', data);
+
     const userService = context.app.service('users')
     const compositionService = context.app.service('compositions')
 
@@ -56,7 +54,6 @@ module.exports = function (options = {}) {
     }
 
     if(data.removeAll) {
-      console.log('inside removeAll!!!!!!!!!!!!!!!!!!!!!!!');
       const userInfo = await compositionService.find({
         query: {
           active: {$in: [data.removeAll]}
@@ -167,12 +164,12 @@ function isNewCollabThere (listCollab, newCollab) {
 // This function is used to check if the collaborator that is to be added exists in the db
 function doesUserExist (userList) {
   if (userList.data.length === 0) {
-    throw new Error("no such user exists");
+    throw new Error('no such user exists');
   }
 }
 // This function is used to make sure that the user does not add themselves as the user
 function isAddedUserSameAsCollaborator (user, collaborator) {
   if (user === collaborator) {
-    throw new Error("You can not collaborate with yourself")
+    throw new Error('You can not collaborate with yourself')
   }
 }

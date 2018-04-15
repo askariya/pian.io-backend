@@ -1,7 +1,6 @@
 
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const processActiveUsers = require('../../hooks/process-activeUsers');
-const processRemoveUsers = require('../../hooks/process-activeRemoval');
 
 module.exports = {
   before: {

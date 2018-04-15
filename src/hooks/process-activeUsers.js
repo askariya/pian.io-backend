@@ -23,7 +23,6 @@ module.exports = function (options = {}) {
 // This function is used to remove a user from the list of active users
 function checkForDuplicates(activeUsers, user ) {
   let count = 0;
-  console.log('in duplcautes-------------------------', activeUsers, activeUsers.length)
   if(activeUsers.length === 0){
       return 0
   } else {
