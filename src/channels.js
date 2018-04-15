@@ -5,10 +5,12 @@ module.exports = function(app) {
     return;
   }
 
-  app.on('connection', connection => {
+  app.on('connection', function(connection) {
     // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
   });
+
+
 
   app.on('login', (authResult, { connection }) => {
     // connection can be undefined if there is no
@@ -33,6 +35,7 @@ module.exports = function(app) {
       // Easily organize users by email and userid for things like messaging
       // app.channel(`emails/${user.email}`).join(channel);
       // app.channel(`userIds/$(user.id}`).join(channel);
+
     }
   });
 

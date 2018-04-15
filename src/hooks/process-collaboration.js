@@ -13,10 +13,12 @@ module.exports = function (options = {}) {
     const { data } = context;
     const { params } = context;
 
-    // console.log("Patching!")
-
+    let user;
     // The authenticated user
-    const user = params.user.username;
+    if(params.user){
+      user = params.user.username;
+    }
+
     let name = data.nameOfComposition;
 
     const userService = context.app.service('users')
@@ -162,12 +164,12 @@ function isNewCollabThere (listCollab, newCollab) {
 // This function is used to check if the collaborator that is to be added exists in the db
 function doesUserExist (userList) {
   if (userList.data.length === 0) {
-    throw new Error("no such user exists");
+    throw new Error('no such user exists');
   }
 }
 // This function is used to make sure that the user does not add themselves as the user
 function isAddedUserSameAsCollaborator (user, collaborator) {
   if (user === collaborator) {
-    throw new Error("You can not collaborate with yourself")
+    throw new Error('You can not collaborate with yourself')
   }
 }
